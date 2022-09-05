@@ -154,8 +154,12 @@ class LocalizedRichText extends StatelessWidget {
       }
 
       //Add the custom TextSpan
-      _addTextSpan(textSpans, localizedKey.value, localizedKey.textStyle,
-          gestureRecognizer: localizedKey.gestureRecognizer);
+      _addTextSpan(
+        textSpans,
+        localizedKey.value,
+        localizedKey.textStyle,
+        gestureRecognizer: localizedKey.gestureRecognizer,
+      );
 
       final textAfterTheKey = localizedText.split(_key).last;
 
@@ -177,10 +181,17 @@ class LocalizedRichText extends StatelessWidget {
     return textSpans;
   }
 
-  void _addTextSpan(List<TextSpan> list, String text, TextStyle textStyle,
-      {GestureRecognizer? gestureRecognizer}) {
-    final textSpan =
-        TextSpan(text: text, style: textStyle, recognizer: gestureRecognizer);
+  void _addTextSpan(
+    List<TextSpan> list,
+    String text,
+    TextStyle textStyle, {
+    GestureRecognizer? gestureRecognizer,
+  }) {
+    final textSpan = TextSpan(
+      text: text,
+      style: textStyle,
+      recognizer: gestureRecognizer,
+    );
     return list.add(textSpan);
   }
 }
