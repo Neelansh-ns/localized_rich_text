@@ -1,5 +1,6 @@
 library localized_rich_text;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:localized_rich_text/extensions.dart';
 
@@ -153,11 +154,8 @@ class LocalizedRichText extends StatelessWidget {
       }
 
       //Add the custom TextSpan
-      _addTextSpan(
-        textSpans,
-        localizedKey.value,
-        localizedKey.textStyle,
-      );
+      _addTextSpan(textSpans, localizedKey.value, localizedKey.textStyle,
+          gestureRecognizer: localizedKey.gestureRecognizer);
 
       final textAfterTheKey = localizedText.split(_key).last;
 
@@ -179,15 +177,10 @@ class LocalizedRichText extends StatelessWidget {
     return textSpans;
   }
 
-  void _addTextSpan(
-    List<TextSpan> list,
-    String text,
-    TextStyle textStyle,
-  ) {
-    final textSpan = TextSpan(
-      text: text,
-      style: textStyle,
-    );
+  void _addTextSpan(List<TextSpan> list, String text, TextStyle textStyle,
+      {GestureRecognizer? gestureRecognizer}) {
+    final textSpan =
+        TextSpan(text: text, style: textStyle, recognizer: gestureRecognizer);
     return list.add(textSpan);
   }
 }
@@ -204,9 +197,12 @@ class LocalizedRichTextKey {
   /// This is the `TextStyle` of the `Key`.
   TextStyle textStyle;
 
+  GestureRecognizer? gestureRecognizer;
+
   LocalizedRichTextKey({
     required this.key,
     required this.value,
     required this.textStyle,
+    this.gestureRecognizer,
   });
 }
